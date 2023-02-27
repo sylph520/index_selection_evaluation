@@ -4,8 +4,8 @@ import platform
 import re
 import subprocess
 
-from .utils import b_to_mb
-from .workload import Column, Table
+from selection.utils import b_to_mb
+from selection.workload import Column, Table
 
 
 class TableGenerator:
@@ -116,7 +116,10 @@ class TableGenerator:
     def _run_command(self, command):
         cmd_out = "[SUBPROCESS OUTPUT] "
         p = subprocess.Popen(
-            command, cwd=self.directory, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+            command,
+            cwd=self.directory,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
         )
         with p.stdout:
             for line in p.stdout:
