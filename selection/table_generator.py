@@ -36,7 +36,11 @@ class TableGenerator:
         if self.explicit_database_name:
             return self.explicit_database_name
 
-        name = "indexselection_" + self.benchmark_name + "___"
+        if self.benchmark_name == 'tpchc':
+            name = "indexselection_" + "tpch" + "___"
+        else:
+            name = "indexselection_" + self.benchmark_name + "___"
+
         name += str(self.scale_factor).replace(".", "_")
         return name
 
@@ -130,7 +134,7 @@ class TableGenerator:
         return os.listdir(self.directory)
 
     def _prepare(self):
-        if self.benchmark_name == "tpch":
+        if self.benchmark_name == "tpch" or self.benchmark_name == "tpchc":
             self.make_command = ["make", "DATABASE=POSTGRESQL"]
             if platform.system() == "Darwin":
                 self.make_command.append("MACHINE=MACOS")
