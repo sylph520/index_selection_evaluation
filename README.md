@@ -58,8 +58,28 @@ coverage html
 open htmlcov/index.html
 ```
 
-## Adding a new algorithm:
+## Extensibility
+
+### Adding new/custom workloads
+
+* Create a new folder in `custom_workloads/` and place SQL text files in there. See, for example, `custom_worloads/example` or `custom_worloads/Custom_vldb`.
+* Create a corresponding configuration file that references this folder (JSON key "benchmark_name"), the database to use (JSON key "database_name"), and query files to include (JSON key "queries").
+  See, for example, `example_configs/config_custom.json` or `example_configs/config_custom_vldb.json`.
+
+### Adding a new algorithm:
 * Create a new algorithm class, based on `selection/algorithms/example_algorithm.py`
+  
+  Algorithms can use the provided [Workload](https://github.com/hyrise/index_selection_evaluation/blob/refactoring/selection/workload.py) information and [cost estimation interface](https://github.com/hyrise/index_selection_evaluation/blob/refactoring/selection/cost_evaluation.py).
+
+  For example, (within a SelectionAlgorithm) the following code would estimate the cost for each workload query without indexes:
+
+  ```
+  query_costs_without_indexes = {}
+  for query in workload.queries:
+      query_costs_without_indexes[query] = self.cost_evaluation.calculate_cost(
+          Workload([query]), set()
+      )
+  ```
 * Add algorithm class name in `selection/index_selection_evaluation.py` to this dictionary:
 ```
 ALGORITHMS = {'extend': ExtendAlgorithm,
@@ -67,6 +87,11 @@ ALGORITHMS = {'extend': ExtendAlgorithm,
 ```
 * Create or adjust configuration files
 
+### Supporting a new database system:
+
+The platform and algorithms support different database systems by using the [DatabaseConnector](https://github.com/hyrise/index_selection_evaluation/blob/refactoring/selection/database_connector.py) interface, also indirectly via the [CostEvaluation](https://github.com/hyrise/index_selection_evaluation/blob/refactoring/selection/cost_evaluation.py) interface.
+
+A new database connector class must be added for a new system.
 
 ## Formatting and Linting
 The code can be automatically formatted and linted by calling `./scripts/format.sh` and `./scripts/lint.sh` from the main folder.

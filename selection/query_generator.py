@@ -81,7 +81,8 @@ class QueryGenerator:
             "../..",
         ]
         self._run_command(command)
-        with open("query_0.sql", "r") as file:
+        file_path = os.path.dirname(os.path.abspath(__file__))
+        with open(file_path + "/../query_0.sql", "r") as file:
             queries_string = file.read()
         for query_string in queries_string.split("-- start query"):
             id_and_text = query_string.split(".tpl\n", 1)
@@ -109,7 +110,7 @@ class QueryGenerator:
 
     def _run_make(self):
         if "qgen" not in self._files() and "dsqgen" not in self._files():
-            logging.info("Running make in {}".format(self.directory))
+            logging.info(f"Running {self.make_command} in {self.directory}")
             self._run_command(self.make_command)
         else:
             logging.debug("No need to run make")
@@ -137,18 +138,19 @@ class QueryGenerator:
         return os.listdir(self.directory)
 
     def generate(self):
+        file_path = os.path.dirname(os.path.abspath(__file__))
         if self.benchmark_name == "tpch":
-            self.directory = "./tpch-kit/dbgen"
+            self.directory = file_path + "/../tpch-kit/dbgen"
             # DBMS in tpch-kit dbgen Makefile:
             # INFORMIX, DB2, TDAT (Teradata),
             # SQLSERVER, SYBASE, ORACLE, VECTORWISE, POSTGRESQL
             self.make_command = ["make", "DATABASE=POSTGRESQL"]
             if platform.system() == "Darwin":
-                self.make_command.append("OS=MACOS")
+                self.make_command.append("MACHINE=MACOS")
 
             self._generate_tpch()
         elif self.benchmark_name == "tpcds":
-            self.directory = "./tpcds-kit/tools"
+            self.directory = file_path + "/../tpcds-kit/tools"
             self.make_command = ["make"]
             if platform.system() == "Darwin":
                 self.make_command.append("OS=MACOS")
