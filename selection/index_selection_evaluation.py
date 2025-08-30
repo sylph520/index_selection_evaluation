@@ -99,6 +99,16 @@ class IndexSelection:
             )
             pickle.dump(self.workload, open(pickle_filename, "wb"))
 
+        if "save_workload_sql" in config and config["save_workload_sql"] is True:
+            sql_filename = (
+                f"benchmark_results/workload_{config['benchmark_name']}"
+                f"_{len(self.workload.queries)}_queries.sql"
+            )
+            with open(sql_filename, 'w') as f:
+                query_texts = self.workload.query_texts()
+                for q_text in query_texts:
+                    f.write(q_text)
+
     def _run_algorithms(self, config_file):
         with open(config_file) as f:
             config = json.load(f)

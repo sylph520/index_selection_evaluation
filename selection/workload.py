@@ -33,6 +33,10 @@ class Workload:
     def potential_indexes(self):
         return sorted([Index([c]) for c in self.indexable_columns()])
 
+    def query_texts(self):
+        qry_texts = [q.text for q in self.queries]
+        return qry_texts
+
 
 class Column:
     def __init__(self, name):
