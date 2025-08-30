@@ -1,3 +1,4 @@
+-- (Q1)
 -- Functional Query Definition
 -- Approved February 1998
 
@@ -24,7 +25,8 @@ order by
 l_returnflag,
 l_linestatus ;
 -- $ID$
--- TPC-H/TPC-R Minimum Cost Supplier -- Functional Query Definition
+-- TPC-H/TPC-R Minimum Cost Supplier -- (Q3)
+-- Functional Query Definition
 -- Approved February 1998
 
 
@@ -51,7 +53,8 @@ order by
 revenue desc,
 o_orderdate limit 10;
 -- $ID$
--- TPC-H/TPC-R Order Priority Checking -- Functional Query Definition
+-- TPC-H/TPC-R Order Priority Checking -- (Q4)
+-- Functional Query Definition
 -- Approved February 1998
 
 
@@ -77,7 +80,8 @@ o_orderpriority
 order by
 o_orderpriority ;
 -- $ID$
--- TPC-H/TPC-R Local Supplier Volume -- Functional Query Definition
+-- TPC-H/TPC-R Local Supplier Volume -- (Q5)
+-- Functional Query Definition
 -- Approved February 1998
 
 
@@ -106,7 +110,8 @@ n_name
 order by
 revenue desc ;
 -- $ID$
--- TPC-H/TPC-R Forecasting Revenue Change -- Functional Query Definition
+-- TPC-H/TPC-R Forecasting Revenue Change -- (Q6)
+-- Functional Query Definition
 -- Approved February 1998
 
 
@@ -120,7 +125,8 @@ and l_shipdate < date '1994-01-01' + interval '1' year
 and l_discount between .06 - 0.01 and .06 + 0.01
 and l_quantity < 24 ;
 -- $ID$
--- TPC-H/TPC-R Volume Shipping -- Functional Query Definition
+-- TPC-H/TPC-R Volume Shipping -- (Q7)
+-- Functional Query Definition
 -- Approved February 1998
 
 
@@ -164,7 +170,8 @@ supp_nation,
 cust_nation,
 l_year ;
 -- $ID$
--- TPC-H/TPC-R National Market Share -- Functional Query Definition
+-- TPC-H/TPC-R National Market Share -- (Q8)
+-- Functional Query Definition
 -- Approved February 1998
 
 
@@ -206,7 +213,8 @@ o_year
 order by
 o_year ;
 -- $ID$
--- TPC-H/TPC-R Product Type Profit Measure -- Functional Query Definition
+-- TPC-H/TPC-R Product Type Profit Measure -- (Q9)
+-- Functional Query Definition
 -- Approved February 1998
 
 
@@ -243,7 +251,8 @@ order by
 nation,
 o_year desc ;
 -- $ID$
--- TPC-H/TPC-R Returned Item Reporting -- Functional Query Definition
+-- TPC-H/TPC-R Returned Item Reporting -- (Q10)
+-- Functional Query Definition
 -- Approved February 1998
 
 
@@ -279,7 +288,8 @@ c_comment
 order by
 revenue desc limit 20;
 -- $ID$
--- TPC-H/TPC-R Important Stock Identification -- Functional Query Definition
+-- TPC-H/TPC-R Important Stock Identification -- (Q11)
+-- Functional Query Definition
 -- Approved February 1998
 
 
@@ -311,7 +321,8 @@ and n_name = 'GERMANY'
 order by
 value desc ;
 -- $ID$
--- TPC-H/TPC-R Shipping Modes and Order Priority -- Functional Query Definition
+-- TPC-H/TPC-R Shipping Modes and Order Priority -- (Q12)
+-- Functional Query Definition
 -- Approved February 1998
 
 
@@ -344,7 +355,8 @@ l_shipmode
 order by
 l_shipmode ;
 -- $ID$
--- TPC-H/TPC-R Customer Distribution -- Functional Query Definition
+-- TPC-H/TPC-R Customer Distribution -- (Q13)
+-- Functional Query Definition
 -- Approved February 1998
 
 
@@ -369,7 +381,8 @@ order by
 custdist desc,
 c_count desc ;
 -- $ID$
--- TPC-H/TPC-R Promotion Effect -- Functional Query Definition
+-- TPC-H/TPC-R Promotion Effect -- (Q14)
+-- Functional Query Definition
 -- Approved February 1998
 
 
@@ -387,7 +400,8 @@ l_partkey = p_partkey
 and l_shipdate >= date '1995-09-01'
 and l_shipdate < date '1995-09-01' + interval '1' month ;
 -- $ID$
--- TPC-H/TPC-R Top Supplier -- Functional Query Definition
+-- TPC-H/TPC-R Top Supplier -- (Q15)
+-- Functional Query Definition
 -- Approved February 1998
 
 create view revenue0 (supplier_no, total_revenue) as
@@ -425,7 +439,8 @@ s_suppkey;
 
 drop view revenue0 ;
 -- $ID$
--- TPC-H/TPC-R Parts/Supplier Relationship -- Functional Query Definition
+-- TPC-H/TPC-R Parts/Supplier Relationship -- (Q16)
+-- Functional Query Definition
 -- Approved February 1998
 
 
@@ -460,7 +475,8 @@ p_brand,
 p_type,
 p_size ;
 -- $ID$
--- TPC-H/TPC-R Small-Quantity-Order Revenue -- Function Query Definition
+-- TPC-H/TPC-R Small-Quantity-Order Revenue -- (Q18)
+-- Function Query Definition
 -- Approved February 1998
 
 
@@ -497,7 +513,8 @@ order by
 o_totalprice desc,
 o_orderdate limit 100;
 -- $ID$
--- TPC-H/TPC-R Discounted Revenue -- Functional Query Definition
+-- TPC-H/TPC-R Discounted Revenue -- (Q19)
+-- Functional Query Definition
 -- Approved February 1998
 
 
@@ -537,7 +554,8 @@ and l_shipmode in ('AIR', 'AIR REG')
 and l_shipinstruct = 'DELIVER IN PERSON'
 ) ;
 -- $ID$
--- TPC-H/TPC-R Potential Part Promotion -- Functional Query Definition
+-- TPC-H/TPC-R Potential Part Promotion -- (Q21)
+-- Functional Query Definition
 -- Approved February 1998
 
 
@@ -581,7 +599,8 @@ order by
 numwait desc,
 s_name limit 100;
 -- $ID$
--- TPC-H/TPC-R Global Sales Opportunity -- Functional Query Definition
+-- TPC-H/TPC-R Global Sales Opportunity -- (Q22)
+-- Functional Query Definition
 -- Approved February 1998
 
 

@@ -92,6 +92,7 @@ class IndexSelection:
             )
             self.workload = Workload(query_generator.queries)
 
+        # import pdb; pdb.set_trace()
         if "pickle_workload" in config and config["pickle_workload"] is True:
             pickle_filename = (
                 f"benchmark_results/workload_{config['benchmark_name']}"
@@ -105,9 +106,14 @@ class IndexSelection:
                 f"_{len(self.workload.queries)}_queries.sql"
             )
             with open(sql_filename, 'w') as f:
-                query_texts = self.workload.query_texts()
-                for q_text in query_texts:
+                # query_texts = self.workload.query_texts()
+                # for q_text in query_texts:
+                #     f.write(q_text)
+                for q in self.workload.queries:
+                    q_text = f'-- (Q{q.nr})\n'
+                    q_text += q.text
                     f.write(q_text)
+        # import sys; sys.exit()
 
     def _run_algorithms(self, config_file):
         with open(config_file) as f:
