@@ -2,6 +2,7 @@ import datetime
 import json
 import logging
 import os.path
+import pdb
 import pickle
 import random
 import subprocess
@@ -97,6 +98,7 @@ class Benchmark:
             else:
                 header.append(query.nr)
         header.append("indexed columns")
+        header.append("total workload cost")
         return ";".join(header)
 
     def _git_hash(self):
@@ -133,6 +135,10 @@ class Benchmark:
         ]
         csv_entry.extend(results)
         csv_entry.append(sorted(self.indexes))
+
+        # import pdb;  pdb.set_trace()
+        csv_entry.append(sum([i['Cost'] for i in results]))
+
         self._append_to_csv(";".join([str(x) for x in csv_entry]))
 
         with open(self.picklename, "ba") as file:
@@ -156,6 +162,7 @@ class Benchmark:
         results = [{"Runtimes": [], "Hits": []} for x in self.workload.queries]
         plans = {x.nr: [] for x in self.workload.queries}
 
+        # __import__('ipdb').set_trace()
         for query_id in range(len(self.workload.queries)):
             query = self.workload.queries[query_id]
             cost = self.db_connector.get_cost(query)

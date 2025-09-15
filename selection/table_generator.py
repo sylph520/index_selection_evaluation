@@ -25,7 +25,8 @@ class TableGenerator:
         self.tables = []
         self.columns = []
         self._prepare()
-        if self.database_name() not in self.database_names:
+        # __import__('ipdb').set_trace()
+        if self.database_name().lower() not in self.database_names:
             self._generate()
             self.create_database()
         else:
@@ -154,5 +155,8 @@ class TableGenerator:
                 and self.scale_factor != 0.001
             ):
                 raise Exception("Wrong TPC-DS scale factor")
+        elif 'job' in self.benchmark_name.lower():
+            self.directory = './join-order-benchmark/'
+            self.create_table_statements_file = 'schema.sql'
         else:
             raise NotImplementedError("only TPC-H/DS implemented.")

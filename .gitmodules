@@ -8,3 +8,7 @@
 	path = hypopg
 	url = https://github.com/HypoPG/hypopg.git
 	branch = REL1_STABLE
+[submodule "join-order-benchmark"]
+	path = join-order-benchmark
+	url = https://github.com/sylph520/join-order-benchmark
+	branch = sql_only

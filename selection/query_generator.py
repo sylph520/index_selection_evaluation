@@ -156,5 +156,15 @@ class QueryGenerator:
                 self.make_command.append("OS=MACOS")
 
             self._generate_tpcds()
+        elif 'job' in self.benchmark_name:
+            self.directory = './join-order-benchmark/queries'
+            i = 1
+            for fn in self._files():
+                qf = os.path.join(self.directory, fn)
+                with open(qf, 'r') as f:
+                    content = f.readlines()
+                sql = ''.join(content).strip().replace('\n', ' ')
+                self.add_new_query(i, sql)
+                i += 1
         else:
             raise NotImplementedError("only tpch/tpcds implemented.")
